@@ -1,84 +1,109 @@
-# codex-goals-for-a-task
+<p align="center">
+  <img src="assets/images/01-from-messy-task-to-goal-brief.png" alt="codex-goals-for-a-task turns a messy task into a goal brief" width="920">
+</p>
 
-> A Codex Skill that turns a messy task request into an execution brief, a goal draft, and parallel sub-goals before any real execution starts.
+<h1 align="center">codex-goals-for-a-task</h1>
 
-> 一个面向 Codex 的 Skill：先把模糊任务整理成执行简报、goal 草稿和并行子目标，再决定是否真正执行。
+<p align="center">
+  <strong>A planning-first Codex Skill for turning vague requests into execution briefs, goal drafts, and parallel sub-goals.</strong>
+</p>
 
-![From messy task to goal brief](assets/images/01-from-messy-task-to-goal-brief.png)
+<p align="center">
+  <a href="skills/codex-goals-for-a-task/SKILL.md"><img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-111827?style=for-the-badge"></a>
+  <img alt="Planning first" src="https://img.shields.io/badge/Mode-Plan%20First-2563eb?style=for-the-badge">
+  <img alt="Goal safe" src="https://img.shields.io/badge/Goal-Safe%20Boundary-16a34a?style=for-the-badge">
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-f59e0b?style=for-the-badge"></a>
+</p>
 
-## Language Guide
+<p align="center">
+  <a href="#-english">🇬🇧 English</a>
+  ·
+  <a href="#-中文">🇨🇳 中文</a>
+  ·
+  <a href="#-日本語">🇯🇵 日本語</a>
+  ·
+  <a href="#-한국어">🇰🇷 한국어</a>
+</p>
 
-| Language | Section |
+---
+
+## At A Glance
+
+`codex-goals-for-a-task` helps Codex pause before doing work. It converts a raw task into a clear plan that can be reviewed, refined, and only then promoted into a real Codex goal.
+
+`codex-goals-for-a-task` 会让 Codex 先停下来做规划：把原始任务整理成可审阅、可改进、可验证的执行方案，然后再由用户决定是否创建真实 Codex goal。
+
+| What goes in | What comes out |
 | --- | --- |
-| 🇬🇧 English | [Overview](#-english-overview) |
-| 🇨🇳 中文 | [中文说明](#-中文说明) |
-| 🇯🇵 日本語 | [日本語説明](#-日本語説明) |
-| 🇰🇷 한국어 | [한국어 설명](#-한국어-설명) |
+| A vague task request | A filled execution brief |
+| A large multi-part project | A top-level goal draft |
+| A risky “just do it” instruction | Success criteria and validation checks |
+| A task that may need parallel agents | Independent bounded sub-goal prompts |
 
-## 🇬🇧 English Overview
+> **Core rule:** Skill trigger does not automatically create a Codex goal.<br>
+> **核心规则：** 触发 Skill 不等于自动创建 Codex goal。
 
-`codex-goals-for-a-task` is a planning-first Codex Skill. It helps Codex turn a vague or multi-part user request into a clear execution package:
+## How It Works
 
-- a filled execution brief,
-- a top-level Codex goal draft,
-- measurable success criteria,
-- expected deliverables,
-- validation checks,
-- bounded sub-goal prompts for parallel agents.
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <h3>1. Brief</h3>
+      <p>Turn a messy request into a concrete execution brief with scope, deliverables, constraints, and validation.</p>
+    </td>
+    <td width="33%" valign="top">
+      <h3>2. Split</h3>
+      <p>Break the work into independent sub-goals only when parallel work is actually useful.</p>
+    </td>
+    <td width="33%" valign="top">
+      <h3>3. Confirm</h3>
+      <p>Create and execute a real Codex goal only after the user explicitly asks for it.</p>
+    </td>
+  </tr>
+</table>
 
-The most important rule is simple:
+<p align="center">
+  <img src="assets/images/02-parallel-subgoals.png" alt="Parallel sub-goals are bounded and independent" width="760">
+</p>
 
-> **Skill trigger does not automatically create a Codex goal.**
+## Why It Feels Better
 
-The Skill creates the plan first. A real Codex goal is created only when the user explicitly asks for it.
-
-### Why It Helps
-
-| Advantage | What it means |
+| Capability | Why it matters |
 | --- | --- |
-| Clear planning boundary | Triggering the Skill creates a plan, not an automatic execution. |
-| Safer Codex goals | Goal creation happens only after explicit user confirmation. |
-| Better parallel work | Sub-goals include context, deliverables, boundaries, and validation. |
-| Easier synthesis | The main agent compares agent output against source context before using it. |
-| Less scope creep | Unrelated refactors and unverified claims are rejected by default. |
+| Planning-first workflow | Reduces accidental execution and makes the work reviewable. |
+| Explicit goal boundary | Keeps Codex goal creation under user control. |
+| Parallel-ready prompts | Gives each agent context, deliverables, boundaries, and validation. |
+| Conflict-aware synthesis | The main agent checks results against source context before using them. |
+| Scope discipline | Avoids unrelated refactors, vague “improvements,” and unverified claims. |
 
-![Parallel subgoals](assets/images/02-parallel-subgoals.png)
-
-### Workflow
-
-```text
-Messy Task
-  -> Execution Brief
-  -> Goal Draft
-  -> Parallel Sub-goals
-  -> User Confirmation
-  -> Create Goal & Execute
-```
-
-### How To Use
-
-Install the Skill into your Codex skills directory:
+## Install
 
 ```bash
 mkdir -p "$HOME/.codex/skills/codex-goals-for-a-task"
 cp skills/codex-goals-for-a-task/SKILL.md "$HOME/.codex/skills/codex-goals-for-a-task/SKILL.md"
 ```
 
-Ask Codex to plan first:
+Then start a new Codex thread so the Skill list can refresh.
+
+## Quick Start
+
+Generate a plan first:
 
 ```text
 Use codex-goals-for-a-task to turn this project into an execution brief and parallel sub-goals. Do not create a real goal yet.
 ```
 
-After reviewing the plan, explicitly ask Codex to create and execute the goal:
+After reviewing the plan, explicitly execute:
 
 ```text
 Create the Codex goal from this brief and execute it.
 ```
 
-![Plan first, execute later](assets/images/03-plan-first-execute-later.png)
+<p align="center">
+  <img src="assets/images/03-plan-first-execute-later.png" alt="Plan first, execute later after user confirmation" width="760">
+</p>
 
-### Example Output
+## Example Plan Shape
 
 ```text
 Brief:
@@ -98,141 +123,42 @@ Validation:
 - Verify that no execution, file mutation, or agent dispatch happens unless requested.
 ```
 
-## 🇨🇳 中文说明
+## 🇬🇧 English
 
-`codex-goals-for-a-task` 是一个“先规划、再执行”的 Codex Skill。它会帮助 Codex 把模糊或复杂的用户请求整理成：
+Use this Skill when you want Codex to plan a complex task before acting. It is especially useful for large features, repo changes, research tasks, UI builds, multi-agent workflows, and any request where execution should be separated from approval.
 
-- 填写完整的执行简报；
-- 顶层 Codex goal 草稿；
-- 可衡量的完成标准；
-- 预期交付物；
-- 验证步骤；
-- 可并行处理、边界清楚的子目标提示。
+The Skill creates a planning package first. It does not automatically create a Codex goal, dispatch agents, mutate files, or start execution unless the user clearly asks for that next step.
 
-最重要的规则是：
+## 🇨🇳 中文
 
-> **触发 Skill 不等于自动创建 Codex goal。**
+当你希望 Codex 先把复杂任务规划清楚，再决定是否执行时，可以使用这个 Skill。它适合大型功能、仓库改造、研究任务、界面构建、多代理协作，以及任何需要把“计划”和“执行”分开的场景。
 
-这个 Skill 默认只生成计划。只有当用户明确说“创建 goal”“开启 goal”“用 goal 执行”时，才进入真实 goal 创建和执行。
+这个 Skill 默认只生成计划包。它不会因为被触发就自动创建 Codex goal、派发代理、修改文件或开始执行；只有用户明确要求下一步时才会继续。
 
-### 它的优势
+## 🇯🇵 日本語
 
-| 优势 | 说明 |
-| --- | --- |
-| 规划边界清楚 | 触发 Skill 只生成计划，不自动执行。 |
-| 执行更安全 | 真实 goal 创建需要用户明确确认。 |
-| 并行更稳定 | 子目标包含上下文、交付物、边界和验证要求。 |
-| 综合更可靠 | 主代理会把代理结果和项目上下文核对后再采用。 |
-| 减少范围漂移 | 默认拒绝无关重构和未经验证的结论。 |
+Codex にすぐ作業させる前に、複雑なタスクを整理したいときに使う Skill です。大きな機能開発、リポジトリ変更、調査、UI 制作、マルチエージェント作業などに向いています。
 
-### 中文使用示例
+この Skill はまず計画パッケージを作ります。Skill が起動しても、Codex goal の作成、エージェント実行、ファイル変更、実作業は自動では始まりません。ユーザーが明示的に依頼した場合だけ次に進みます。
 
-先生成计划：
+## 🇰🇷 한국어
+
+Codex가 바로 실행하기 전에 복잡한 작업을 먼저 정리하고 싶을 때 사용하는 Skill입니다. 큰 기능 개발, 저장소 변경, 리서치, UI 작업, 멀티 에이전트 워크플로우처럼 계획과 실행을 분리해야 하는 상황에 적합합니다.
+
+이 Skill은 먼저 계획 패키지를 만듭니다. Skill이 실행되었다고 해서 Codex goal 생성, 에이전트 실행, 파일 수정, 실제 작업이 자동으로 시작되지는 않습니다. 사용자가 명확히 요청한 경우에만 다음 단계로 진행합니다.
+
+## Repository Map
 
 ```text
-用 codex-goals-for-a-task 帮我把这个项目生成执行简报和并行子目标。先不要创建真实 goal。
+skills/codex-goals-for-a-task/SKILL.md   # The Codex Skill
+assets/images/                           # README illustrations
+README.md                                # GitHub project page
+LICENSE                                  # MIT License
 ```
 
-确认计划后再执行：
+## Design Notes
 
-```text
-根据这个简报创建 Codex goal 并执行。
-```
-
-## 🇯🇵 日本語説明
-
-`codex-goals-for-a-task` は、Codex のための「計画を先に作る」Skill です。曖昧な依頼や複数の作業を含むタスクを、実行しやすい構造に整理します。
-
-この Skill が作るもの：
-
-- 実行ブリーフ；
-- Codex goal の下書き；
-- 測定可能な成功条件；
-- 期待される成果物；
-- 検証ステップ；
-- 並列エージェント向けの独立したサブゴール。
-
-重要なルール：
-
-> **Skill が起動しても、Codex goal は自動作成されません。**
-
-まず計画だけを作ります。実際の goal 作成と実行は、ユーザーが明示的に依頼した場合だけ行います。
-
-### 利点
-
-| 利点 | 内容 |
-| --- | --- |
-| 計画と実行を分離 | Skill の起動は計画作成であり、自動実行ではありません。 |
-| 安全な goal 作成 | goal 作成はユーザーの明示的な確認後に行います。 |
-| 並列作業に強い | 各サブゴールに文脈、成果物、境界、検証を含めます。 |
-| 統合しやすい | エージェントの結果をソース文脈と照合してから採用します。 |
-| スコープ拡大を防ぐ | 不要なリファクタや未検証の主張を避けます。 |
-
-### 日本語での使い方
-
-計画だけを作る：
-
-```text
-codex-goals-for-a-task を使って、このプロジェクトを実行ブリーフと並列サブゴールに整理してください。まだ実際の goal は作成しないでください。
-```
-
-計画を確認してから実行する：
-
-```text
-このブリーフから Codex goal を作成して実行してください。
-```
-
-## 🇰🇷 한국어 설명
-
-`codex-goals-for-a-task`는 Codex를 위한 “계획 우선” Skill입니다. 모호하거나 여러 단계로 나뉜 요청을 실행 가능한 구조로 정리합니다.
-
-이 Skill이 만들어 주는 것:
-
-- 실행 브리프；
-- Codex goal 초안；
-- 측정 가능한 성공 기준；
-- 예상 산출물；
-- 검증 단계；
-- 병렬 에이전트를 위한 독립적인 하위 목표 프롬프트.
-
-가장 중요한 규칙:
-
-> **Skill이 실행되었다고 해서 Codex goal이 자동으로 생성되지는 않습니다.**
-
-먼저 계획만 만듭니다. 실제 goal 생성과 실행은 사용자가 명시적으로 요청한 경우에만 진행합니다.
-
-### 장점
-
-| 장점 | 설명 |
-| --- | --- |
-| 계획과 실행 분리 | Skill 실행은 계획 생성이며 자동 실행이 아닙니다. |
-| 더 안전한 goal 생성 | 실제 goal은 사용자의 명시적 확인 후에만 생성됩니다. |
-| 병렬 작업에 적합 | 각 하위 목표에 맥락, 산출물, 경계, 검증을 포함합니다. |
-| 결과 통합이 쉬움 | 에이전트 결과를 소스 맥락과 비교한 뒤 사용합니다. |
-| 범위 확장 방지 | 관련 없는 리팩터링과 검증되지 않은 주장을 기본적으로 거부합니다. |
-
-### 한국어 사용 예시
-
-먼저 계획만 만들기:
-
-```text
-codex-goals-for-a-task를 사용해서 이 프로젝트를 실행 브리프와 병렬 하위 목표로 정리해 주세요. 아직 실제 goal은 만들지 마세요.
-```
-
-계획 확인 후 실행하기:
-
-```text
-이 브리프를 바탕으로 Codex goal을 생성하고 실행해 주세요.
-```
-
-## Repository Contents
-
-```text
-skills/codex-goals-for-a-task/SKILL.md
-assets/images/
-README.md
-LICENSE
-```
+This README uses a GitHub-friendly project-page pattern: strong visual hero, badges, language shortcuts, feature cards, a short mental model, and concrete usage examples. The layout is intentionally static Markdown/HTML so it renders well on GitHub without a build step.
 
 ## License
 
